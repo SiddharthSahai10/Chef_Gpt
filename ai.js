@@ -3,10 +3,14 @@ You are an assistant that receives a list of ingredients and suggests a recipe. 
 `;
 
 export async function getRecipeFromCohere(ingredientsArr) {
-  const HF_TOKEN = import.meta.env.VITE_OPENROUTER_API_KEY;
+  // Try to get API key from environment variables (works locally)
+  let HF_TOKEN = import.meta.env.VITE_OPENROUTER_API_KEY;
   
+  // If not available, try to get from a public config (for GitHub Pages)
   if (!HF_TOKEN) {
-    throw new Error("VITE_OPENROUTER_API_KEY environment variable is not set. Please check your .env file.");
+    // For GitHub Pages, you'll need to set this as a GitHub Secret and use it in your build process
+    // For now, we'll show an error message
+    throw new Error("API key not configured. Please set up your OpenRouter API key for deployment.");
   }
   
   const ingredientsString = ingredientsArr.join(", ");

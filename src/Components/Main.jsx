@@ -8,6 +8,7 @@ export default function Main(){
     const [ingredients, setIngredients] = React.useState([]);
     const [recipe, setRecipe] = React.useState("");
     const [isLoading, setIsLoading] = React.useState(false);
+    const [error, setError] = React.useState("");
     const recipeRef = React.useRef(null);
 
     async function getRecipe() {
@@ -15,6 +16,7 @@ export default function Main(){
         
         setIsLoading(true);
         setRecipe(""); // Clear previous recipe
+        setError(""); // Clear previous errors
         
         try {
             console.log("📡 getRecipe called with:", ingredients); // Debug
@@ -32,7 +34,11 @@ export default function Main(){
             }, 100);
         } catch (error) {
             console.error("Error generating recipe:", error);
-            setRecipe("Sorry, there was an error generating your recipe. Please try again.");
+            if (error.message.includes("API key not configured")) {
+                setError("This app is not configured with an API key for deployment. Please run it locally with your .env file.");
+            } else {
+                setError("Sorry, there was an error generating your recipe. Please try again.");
+            }
         } finally {
             setIsLoading(false);
         }
@@ -73,6 +79,19 @@ export default function Main(){
             />
             
             {isLoading && <LoadingAnimation />}
+            
+            {error && (
+                <div className="error-message" style={{ 
+                    color: 'red', 
+                    padding: '1rem', 
+                    margin: '1rem 0', 
+                    backgroundColor: '#ffe6e6', 
+                    borderRadius: '8px',
+                    border: '1px solid #ffcccc'
+                }}>
+                    {error}
+                </div>
+            )}
             
             {recipe && !isLoading && (
                 <div ref={recipeRef}>
