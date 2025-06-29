@@ -6,10 +6,14 @@ export async function getRecipeFromCohere(ingredientsArr) {
   // Try to get API key from environment variables (works locally)
   let HF_TOKEN = import.meta.env.VITE_OPENROUTER_API_KEY;
   
-  // If not available, try to get from a public config (for GitHub Pages)
+  // Fallback for development (remove this in production)
   if (!HF_TOKEN) {
-    // For GitHub Pages, you'll need to set this as a GitHub Secret and use it in your build process
-    // For now, we'll show an error message
+    console.warn("API key not found in environment variables. Using fallback for development.");
+    // You can temporarily uncomment the line below for testing, but remove it before pushing to production
+    // HF_TOKEN = "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";
+  }
+  
+  if (!HF_TOKEN) {
     throw new Error("API key not configured. Please set up your OpenRouter API key for deployment.");
   }
   
