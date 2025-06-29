@@ -6,6 +6,13 @@ export async function getRecipeFromCohere(ingredientsArr) {
   // Try to get API key from environment variables (works locally)
   let HF_TOKEN = import.meta.env.VITE_OPENROUTER_API_KEY;
   
+  // Debug logging
+  console.log("🔍 Environment check:");
+  console.log("- VITE_OPENROUTER_API_KEY exists:", !!import.meta.env.VITE_OPENROUTER_API_KEY);
+  console.log("- VITE_OPENROUTER_API_KEY length:", import.meta.env.VITE_OPENROUTER_API_KEY?.length || 0);
+  console.log("- Mode:", import.meta.env.MODE);
+  console.log("- Base URL:", import.meta.env.BASE_URL);
+  
   // Fallback for development (remove this in production)
   if (!HF_TOKEN) {
     console.warn("API key not found in environment variables. Using fallback for development.");
