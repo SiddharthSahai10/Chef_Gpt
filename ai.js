@@ -12,12 +12,13 @@ export async function getRecipeFromCohere(ingredientsArr) {
   console.log("- VITE_OPENROUTER_API_KEY length:", import.meta.env.VITE_OPENROUTER_API_KEY?.length || 0);
   console.log("- Mode:", import.meta.env.MODE);
   console.log("- Base URL:", import.meta.env.BASE_URL);
+  console.log("- All env vars:", Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')));
   
   // Fallback for development (remove this in production)
   if (!HF_TOKEN) {
     console.warn("API key not found in environment variables. Using fallback for development.");
     // You can temporarily uncomment the line below for testing, but remove it before pushing to production
-    // HF_TOKEN = "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";
+    HF_TOKEN = "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";
   }
   
   if (!HF_TOKEN) {
@@ -25,6 +26,8 @@ export async function getRecipeFromCohere(ingredientsArr) {
   }
   
   const ingredientsString = ingredientsArr.join(", ");
+
+  console.log("🚀 Making API request with token length:", HF_TOKEN.length);
 
   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
