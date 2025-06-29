@@ -1,6 +1,42 @@
 # Chef Claude - AI Recipe Generator
 
-A React application that generates recipes based on available ingredients using AI.
+A React-based web application that generates recipes based on available ingredients using OpenRouter AI.
+
+## Features
+
+- Add ingredients to create a recipe
+- AI-powered recipe generation
+- Modern, responsive UI
+- Real-time recipe suggestions
+
+## Setup
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Create a `.env` file in the root directory:
+   ```
+   VITE_OPENROUTER_API_KEY=your_openrouter_api_key_here
+   ```
+4. Run the development server: `npm run dev`
+
+## Deployment
+
+The app is automatically deployed to GitHub Pages when changes are pushed to the main branch.
+
+## Technologies Used
+
+- React
+- Vite
+- OpenRouter AI API
+- CSS3
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
+---
+
+*Updated API key configuration for improved reliability*
 
 ## 🚀 Live Demo
 
